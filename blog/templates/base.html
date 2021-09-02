@@ -91,12 +91,21 @@
 								<li class="menu-item">
 									<a class="menu-link" href="{% url 'home' %}"><div>Contact</div></a>					
 								</li>
-								<li class="menu-item">
-									<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'home' %}"><div>Register</div></a>				
-								</li>
-								<li class="menu-item">
-									<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'home' %}"><div>Login</div></a>			
-								</li>
+								{% if user.is_authenticated %}
+									<li class="menu-item">
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'post-create' %}"><div>Create Post</div></a>				
+									</li>
+									<li class="menu-item">
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="#"><div>Logout</div></a>			
+									</li>
+								{% else %}
+									<li class="menu-item">
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="#"><div>Register</div></a>				
+									</li>
+									<li class="menu-item">
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="#"><div>Login</div></a>			
+									</li>
+								{% endif %}
 							</ul>
 
 						</nav><!-- #primary-menu end -->
