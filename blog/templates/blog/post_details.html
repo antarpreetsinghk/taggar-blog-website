@@ -39,8 +39,10 @@
 											<li><i class="icon-calendar3"></i> {{ post.updated_at|date:"M-d-Y," }}</li>
 											<li><a href="#"><i class="icon-user"></i> {{ post.author }}</a></li>
 											<li><i class="icon-folder-open"></i> <a href="#">{{ post.post_category }}</a></li>
-                                            <li><a href="#"><i class="icon-edit"></i> Edit</a></li>
-                                            <li><a href="#"><i class="icon-remove"></i> Delete</a></li>
+											{% if post.author.pk == request.user.pk %}
+												<li><a href="{% url 'post-update' pk=post.id %}"><i class="icon-edit"></i> Edit</a></li>
+												<li><a href="{% url 'post-delete' pk=post.id %}"><i class="icon-remove"></i> Delete</a></li>
+											{% endif %}
 										</ul>
 									</div><!-- .entry-meta end -->
 									<!-- Entry Image ============================================= -->

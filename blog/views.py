@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Category, Comment
-from .forms import UserRegisterForm, CommentForm
+from .forms import PostForm, CommentForm, UserRegisterForm
 from django.http import HttpResponseRedirect
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse
 
 
 def home(request):
@@ -46,3 +49,36 @@ def categories(request, category_slug):
         'categories_name': Category.objects.all().order_by('-id'),
     }
     return render(request, 'blog/categories.html', context)
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/post_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/post_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+
+    def get_success_url(self):
+        return reverse('home')
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False

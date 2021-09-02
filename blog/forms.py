@@ -1,8 +1,22 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import CharField
-from .models import Comment
+from django.forms import CharField, fields
+from .models import Post, Comment
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['post_category', 'title', 'image', 'content']
+
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+
+        self.fields['post_category'].widget.attrs['class'] = 'form-control'
+        self.fields['title'].widget.attrs['class'] = 'form-control'
+        self.fields['image'].widget.attrs['class'] = 'form-control'
+        self.fields['content'].widget.attrs['class'] = 'form-control'
 
 
 class UserRegisterForm(UserCreationForm):
@@ -26,4 +40,3 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content',]
-

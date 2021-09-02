@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+		<!-- Page Title ============================================= -->
+		<section id="page-title">
+
+			<div class="container clearfix">
+				<h1>Post Delete</h1>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Post Delete</li>
+				</ol>
+			</div>
+
+		</section><!-- #page-title end -->
+<div class="container">
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                <h2>Are you sure you want to delete the post "{{ object.title }}"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="button button-large button-black button-dark font-weight-medium ls0 button-rounded" type="submit">Yes, Delete</button>
+                <a class="button button-large font-weight-medium ls0 button-rounded" href="{% url 'post-details' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
