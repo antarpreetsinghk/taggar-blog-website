@@ -1,0 +1,5 @@
+*.pyc
+db.sqlite3
+django.db.backends.sqlite3
+media
+dump.rdb
