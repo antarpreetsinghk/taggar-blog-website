@@ -25,10 +25,11 @@
 				<div>	
 					<div class="row">
 						<div class="col-lg-6">
-							<form class="row" method="POST">
+							<form method="POST">
 								<div class="col-12 form-group">
 									{% csrf_token %}
 									{{ form.as_p }}
+									<small class="form-text text-muted mt-4"><a href="{% url 'login' %}">Already a member? Please Login</a></small>
 								</div>
 								<button type="SUBMIT" class="button button-large button-black button-dark font-weight-medium ls0 button-rounded mt-3">Register</button>
 							</form>

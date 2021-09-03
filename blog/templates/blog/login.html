@@ -25,12 +25,13 @@
 				<div>	
 					<div class="row">
 						<div class="col-lg-6">
-							<form class="row" method="POST">
+							<form method="POST">
 								<div class="col-12 form-group">
 									{% csrf_token %}
 									{{ form }}
+									<small class="form-text text-muted"><a href="{% url 'register' %}">Not a member yet? Register</a></small>
 								</div>
-								<button type="SUBMIT" class="button button-large button-black button-dark font-weight-medium ls0 button-rounded mt-3">Login</button>
+								<button type="SUBMIT" class="button  button-black button-dark font-weight-medium ls0 button-rounded mt-3">Login</button>
 								<small class="text-muted"><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
 							</form>
 						</div>
