@@ -93,25 +93,28 @@
 								</li>
 								{% if user.is_authenticated %}
 									<li class="menu-item">
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'profile' %}"><div>Profile</div></a>					
+									</li>
+									<li class="menu-item">
 										<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'post-create' %}"><div>Create Post</div></a>				
 									</li>
 									<li class="menu-item">
-										<a class="menu-link" style="color: rgb(41, 106, 245);" href="#"><div>Logout</div></a>			
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'logout' %}"><div>Logout</div></a>			
 									</li>
 								{% else %}
 									<li class="menu-item">
-										<a class="menu-link" style="color: rgb(41, 106, 245);" href="#"><div>Register</div></a>				
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'register' %}"><div>Register</div></a>				
 									</li>
 									<li class="menu-item">
-										<a class="menu-link" style="color: rgb(41, 106, 245);" href="#"><div>Login</div></a>			
+										<a class="menu-link" style="color: rgb(41, 106, 245);" href="{% url 'login' %}"><div>Login</div></a>			
 									</li>
 								{% endif %}
 							</ul>
 
 						</nav><!-- #primary-menu end -->
 
-						<form class="top-search-form" action="search.html" method="get">
-							<input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
+						<form name="search-form" class="top-search-form" action="{% url 'search' %}" method="get">
+							<input type="text" name="q" class="form-control" placeholder="Type &amp; Hit Enter.." autocomplete="off">
 						</form>
 
 					</div>

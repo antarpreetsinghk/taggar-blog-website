@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+
+	<!-- Page Title ============================================= -->
+	<section id="page-title">
+		<div class="container clearfix">
+			<h1>Logout</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Logout</li>
+			</ol>
+		</div>
+	</section><!-- #page-title end -->
+
+	<!-- Content ============================================= -->
+    <section id="content">
+        <div class="content-wrap pt-5" style="overflow: visible;">
+            <div class="container">
+                <h2>You have been logged out</h2>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        <a href="{% url 'login' %}">Log In Again</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- #content end -->
+
+{% endblock %}

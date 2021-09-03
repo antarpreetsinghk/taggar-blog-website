@@ -1,10 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Category, Comment
-from .forms import PostForm, CommentForm, UserRegisterForm
+from .forms import PostForm, CommentForm, UserRegisterForm, LoginForm
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 def home(request):
@@ -82,3 +87,47 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'blog/register.html', {'form': form})
+
+
+class LoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'blog/login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('profile')
+
+
+@login_required
+def profile(request):
+    return render(request, 'blog/profile.html')
+
+
+def auther(request, id):
+    auther = get_object_or_404(User, id=id) 
+    context = {
+        'auther': auther,
+        'posts': Post.objects.filter(author=auther, published=True),
+        'categories_name': Category.objects.all().order_by('-id'),
+    }
+    return render(request, 'blog/auther.html', context)
+
+
+def search(request):
+    query = request.GET['q']
+    context = {
+        'posts': Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query), published=True),
+        'categories_name': Category.objects.all().order_by('-id'),
+    }
+    return render(request, 'blog/search.html', context)

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+	<!-- Page Title ============================================= -->
+	<section id="page-title">
+
+		<div class="container clearfix">
+			<h1>Login</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Login</li>
+			</ol>
+		</div>
+
+	</section><!-- #page-title end -->
+
+	<!-- Content ============================================= -->
+	<section id="content">
+		<div class="content-wrap">
+			<div class="container clearfix">
+				<div>	
+					<div class="row">
+						<div class="col-lg-6">
+							<form class="row" method="POST">
+								<div class="col-12 form-group">
+									{% csrf_token %}
+									{{ form }}
+								</div>
+								<button type="SUBMIT" class="button button-large button-black button-dark font-weight-medium ls0 button-rounded mt-3">Login</button>
+								<small class="text-muted"><a href="#">Forgot Password?</a></small>
+							</form>
+						</div>
+						<div class="col-lg-6 ps-lg-5">
+								
+							<!-- custom content or image -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- #content end -->
+
+{% endblock %}

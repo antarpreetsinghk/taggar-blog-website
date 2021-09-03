@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+	<!-- Page Title ============================================= -->
+	<section id="page-title">
+
+		<div class="container clearfix">
+			<h1>Profile</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Profile</li>
+			</ol>
+		</div>
+
+	</section><!-- #page-title end -->
+
+	<!-- Content ============================================= -->
+    <section id="content">
+        <div class="content-wrap">
+            <div class="container clearfix">
+                <div class="d-flex justify-content-end mb-4">
+                    <a href="{% url 'post-create' %}" class="button button-large button-black button-dark font-weight-medium ls0 button-rounded">Create Post</a>
+                </div>
+
+                <div class="form-widget">
+
+                    <div class="form-result"></div>
+
+                    <div class="row shadow bg-light border">
+
+                        <div class="col-lg-8 p-5">
+                                <div class="form-process">
+                                    <div class="css3-spinner">
+                                        <div class="css3-spinner-scaler"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-form-label">
+                                            <label for="fitness-form-name">User Name:</label>
+                                        </div>
+                                        <div class="col-sm-10 mt-2">
+                                             <h5>{{ user.get_username|title }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 form-group">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-form-label">
+                                            <label for="fitness-form-name">Full Name:</label>
+                                        </div>
+                                        <div class="col-sm-10 mt-2">
+                                             <h5>{{ user.get_full_name|title }}</h5>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-12 form-group">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-form-label">
+                                            <label for="fitness-form-email">Email:</label>
+                                        </div>
+                                        <div class="col-sm-10 mt-2">
+                                            <h5>{{ user.email }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-form-label">
+                                            <label for="fitness-form-phone">Last login:</label>
+                                        </div>
+                                        <div class="col-sm-10 mt-2">
+                                            <h5>{{ user.last_login }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+	<!-- #content end -->
+
+{% endblock %}
