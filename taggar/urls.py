@@ -23,5 +23,6 @@ admin.site.site_header = 'Taggar'
 
 urlpatterns = [
     path('', include('blog.urls')),
+    path('pages/', include('page.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block content %}
+
+	<!-- Page Title ============================================= -->
+	<section id="page-title">
+		<div class="container clearfix">
+			<h1>Privacy Policy</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+			</ol>
+		</div>
+	</section>
+    <!-- #page-title end -->
+
+	<!-- Content ============================================= -->
+	<section id="content">
+		<div class="content-wrap pt-5" style="overflow: visible;">
+			<div class="container">
+				<div class="single-post mb-0">
+					<div class="entry">
+						<div class="entry-content">
+							<div class="row">
+								<div class="text-content col-lg-12">
+									{% for privacy in object_list %}
+										<h2>{{ privacy.title }}</h2>
+										<div class="row" data-lightbox="gallery">
+											<div class="col-md-12">
+												<p>{{ privacy.text|linebreaks}}</p>
+											</div>
+										</div>
+										<div class="line"></div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Content end ============================================= -->
+
+{% endblock %}

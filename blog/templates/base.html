@@ -74,22 +74,22 @@
 									<a class="menu-link" href="{% url 'home' %}"><div>Home</div></a>
 								</li>
 								<li class="menu-item">
-									<a class="menu-link" href="{% url 'home' %}"><div>About</div></a>
+									<a class="menu-link" href="{% url 'about' %}"><div>About</div></a>
 								</li>
 								<li class="menu-item">
-									<a class="menu-link" href="{% url 'home' %}"><div>Gallery</div></a>		
+									<a class="menu-link" href="{% url 'gallery' %}"><div>Gallery</div></a>		
 								</li>
 								<li class="menu-item">
-									<a class="menu-link" href="{% url 'home' %}"><div>Videos</div></a>			
+									<a class="menu-link" href="{% url 'videos' %}"><div>Videos</div></a>			
 								</li>
 								<li class="menu-item">
-									<a class="menu-link" href="{% url 'home' %}"><div>Terms</div></a>				
+									<a class="menu-link" href="{% url 'terms' %}"><div>Terms</div></a>				
 								</li>
 								<li class="menu-item">
-									<a class="menu-link" href="{% url 'home' %}"><div>Policy</div></a>				
+									<a class="menu-link" href="{% url 'privacy' %}"><div>Privacy</div></a>				
 								</li>
 								<li class="menu-item">
-									<a class="menu-link" href="{% url 'home' %}"><div>Contact</div></a>					
+									<a class="menu-link" href="{% url 'contact' %}"><div>Contact</div></a>					
 								</li>
 								{% if user.is_authenticated %}
 									<li class="menu-item">
@@ -149,10 +149,10 @@
 
 										<ul>
 											<li><a href="{% url 'home' %}">Home</a></li>
-											<li><a href="">About</a></li>
-											<li><a href="">Gallery</a></li>
-											<li><a href="">Videos</a></li>
-											<li><a href="">Contact</a></li>
+											<li><a href="{% url 'about' %}">About</a></li>
+											<li><a href="#">Gallery</a></li>
+											<li><a href="#">Videos</a></li>
+											<li><a href="{% url 'contact' %}">Contact</a></li>
 										</ul>
 
 									</div>
@@ -186,9 +186,10 @@
 										<h4>Support</h4>
 
 										<ul>
-											<li><a href="">Privacy Policy</a></li>
-											<li><a href="">Terms of Use</a></li>
-											<li><a href="">FAQs</a></li>
+											<li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+											<li><a href="{% url 'terms' %}">Terms of Use</a></li>
+											<li><a href="{% url 'contact' %}">Contact</a></li>
+											<li><a href="{% url 'faqs' %}">FAQs</a></li>
 										</ul>
 
 									</div>
@@ -236,7 +237,7 @@
 
 						<div class="col-md-6 text-center text-md-start">
 							Copyrights &copy; 2021 All Rights Reserved by Taggar Associates.<br>
-							<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+							<div class="copyright-links"><a href="{% url 'terms' %}">Terms of Use</a> / <a href="{% url 'privacy' %}">Privacy Policy</a></div>
 						</div>
 
 						<div class="col-md-6 text-center text-md-end">

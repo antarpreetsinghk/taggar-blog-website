@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+	<!-- Page Title ============================================= -->
+	<section id="page-title">
+		<div class="container clearfix">
+			<h1>Contact Us</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+			</ol>
+		</div>
+	</section>
+    <!-- #page-title end -->
+
+	<!-- Content ============================================= -->
+
+	<section id="content">
+		<div class="content-wrap pt-5" style="overflow: visible;">
+			<div class="container">
+				<div class="single-post mb-0">
+					<div class="entry">
+						<div class="entry-content">
+							<div class="row">
+								<div class="text-content col-lg-8">
+									{% for contact in object_list %}
+										<h3>{{ contact.title }} - </h3>
+										<div class="row" data-lightbox="gallery">
+											<div class="col-md-12">
+												<p>{{ contact.text|linebreaks }}</p>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+								<div class="text-content col-lg-4">
+									<!-- <img class="rounded" src="{% static 'blog/images/hero/full/4.jpg' %}" alt="Alt Images"> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Content end ============================================= -->
+
+{% endblock %}
