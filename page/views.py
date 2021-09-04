@@ -2,6 +2,7 @@ from .models import AboutUs, Gallery, Video, ContactUs, Faqs, PrivacyPolicy, Ter
 from blog.models import Category
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class AboutView(ListView):
@@ -44,9 +45,25 @@ def videos_list(request, category_slug=None):
     category = None
     categories = VideoCategory.objects.all()
     videos = Video.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(videos, 10)
+    try:
+        videos = paginator.page(page)
+    except PageNotAnInteger:
+        videos = paginator.page(1)
+    except EmptyPage:
+        videos = paginator.page(paginator.num_pages)
     if category_slug:
         category = get_object_or_404(VideoCategory, slug=category_slug)
         videos = Video.objects.filter(category=category)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(videos, 10)
+        try:
+            videos = paginator.page(page)
+        except PageNotAnInteger:
+            videos = paginator.page(1)
+        except EmptyPage:
+            videos = paginator.page(paginator.num_pages)
 
     context = {
         'category': category,

@@ -32,6 +32,25 @@
 								</div>
 								{% endfor %}
 							</div>
+							{% if videos.has_other_pages %}
+								{% if videos.has_previous %}
+									<a class="btn btn-outline-secondary" href="?page=1">First</a>
+									<a class="btn btn-outline-secondary" href="?page={{ videos.previous_page_number }}">Previous</a>
+								{% endif %}
+				
+								{% for num in videos.paginator.page_range %}
+								{% if videos.number == num %}
+									<a class="btn btn-secondary" href="?page={{ num }}">{{ num }}</a>
+								{% elif num > videos.number|add:'-3' and num < videos.number|add:'3' %}
+									<a class="btn btn-outline-secondary" href="?page={{ num }}">{{ num }}</a>
+								{% endif %}
+								{% endfor %}
+						
+								{% if videos.has_next %}
+									<a class="btn btn-outline-secondary" href="?page={{ videos.next_page_number }}">Next</a>
+									<a class="btn btn-outline-secondary" href="?page={{ videos.paginator.num_pages }}">Last</a>
+								{% endif %}
+							{% endif %}
 						</div><!-- .postcontent end -->
 						<!-- Sidebar ============================================= -->
 						<div class="sidebar col-lg-3">
