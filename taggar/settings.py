@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'page.apps.PageConfig',
+    'embed_video',
     'crispy_forms',
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',

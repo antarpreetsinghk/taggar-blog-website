@@ -1,7 +1,7 @@
-from .models import AboutUs, ContactUs, Faqs, PrivacyPolicy, TermsOfUse
+from .models import AboutUs,Video, ContactUs, Faqs, PrivacyPolicy, TermsOfUse, VideoCategory
 from blog.models import Category
 from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 
 class AboutView(ListView):
@@ -38,5 +38,17 @@ def gallery(requst):
     return render(requst, 'page/gallery.html')
 
 
-def videos(requst):
-    return render(requst, 'page/videos.html')
+def videos_list(request, category_slug=None):
+    category = None
+    categories = VideoCategory.objects.all()
+    videos = Video.objects.all()
+    if category_slug:
+        category = get_object_or_404(VideoCategory, slug=category_slug)
+        videos = Video.objects.filter(category=category)
+
+    context = {
+        'category': category,
+        'categories': categories,
+        'videos': videos
+    }
+    return render(request, 'page/videos.html', context)

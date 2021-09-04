@@ -1,4 +1,5 @@
 from django.db import models
+from embed_video.fields import EmbedVideoField
 
 
 class AboutUs(models.Model):
@@ -8,6 +9,28 @@ class AboutUs(models.Model):
 
     class Meta:
         verbose_name_plural = "About Us"
+
+    def __str__(self):
+        return self.title
+
+
+class VideoCategory(models.Model):
+    name = models.CharField(max_length=150, db_index=True)
+    slug = models.SlugField(max_length=150, unique=True ,db_index=True)
+
+    class Meta:
+        ordering = ('name', )
+        verbose_name = 'video category'
+        verbose_name_plural = 'Video Categories'
+
+    def __str__(self):
+        return self.name
+
+
+class Video(models.Model):
+    category = models.ForeignKey(VideoCategory, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=255)
+    video_path = EmbedVideoField()
 
     def __str__(self):
         return self.title

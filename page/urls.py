@@ -9,5 +9,6 @@ urlpatterns = [
     path('paivacy-pollicy/', views.PrivacypollicyView.as_view(), name='privacy'),
     path('terms-of-use/', views.TermsofuseView.as_view(), name='terms'),
     path('gallery/', views.gallery, name='gallery'),
-    path('videos/', views.videos, name='videos'),
+    path('videos/', views.videos_list, name='videos-list'),
+    path('videos/<category_slug>/', views.videos_list, name='videos-list-by-category'),
 ]
