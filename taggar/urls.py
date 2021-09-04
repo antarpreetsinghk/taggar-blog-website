@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-admin.site.site_header = 'Taggar' 
+admin.site.site_header = 'Taggar Associates' 
 
 
 urlpatterns = [

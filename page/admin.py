@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import AboutUs, Video, VideoCategory, ContactUs, Faqs, PrivacyPolicy, TermsOfUse
+from .models import AboutUs,Gallery, Video, VideoCategory, ContactUs, Faqs, PrivacyPolicy, TermsOfUse
 
 
 admin.site.register(AboutUs)
+admin.site.register(Gallery)
 
 class VideoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}

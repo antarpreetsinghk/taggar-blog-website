@@ -1,4 +1,5 @@
 from django.db import models
+from PIL import Image
 from embed_video.fields import EmbedVideoField
 
 
@@ -12,6 +13,27 @@ class AboutUs(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Gallery(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True, default='Image')
+    image = models.ImageField(upload_to='media/gallery_images')
+
+    def save(self):
+        super().save()
+        img = Image.open(self.image.path)
+        if img.height > 300 or img.width > 300:
+            new_img = (1280, 720)
+            img.thumbnail(new_img)
+            img.save(self.image.path, format="JPEG", quality=70)
+
+    class Meta:
+        ordering = ('-pk', )
+        verbose_name = 'Image'
+        verbose_name_plural = 'Gallery'
+
+    def __str__(self):
+        return f'{self.title} - {self.pk}'
 
 
 class VideoCategory(models.Model):

@@ -1,4 +1,4 @@
-from .models import AboutUs,Video, ContactUs, Faqs, PrivacyPolicy, TermsOfUse, VideoCategory
+from .models import AboutUs, Gallery, Video, ContactUs, Faqs, PrivacyPolicy, TermsOfUse, VideoCategory
 from blog.models import Category
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
@@ -34,8 +34,10 @@ class TermsofuseView(ListView):
     model = TermsOfUse
 
 
-def gallery(requst):
-    return render(requst, 'page/gallery.html')
+class GalleryView(ListView):
+    template_name = "page/gallery.html"
+    model = Gallery
+    paginate_by = 15
 
 
 def videos_list(request, category_slug=None):
