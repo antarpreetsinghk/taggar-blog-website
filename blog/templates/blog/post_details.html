@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta-tags %}
+	<meta name="description" content="{{ post.content }}">
+{% endblock %}
+
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -145,7 +149,7 @@
                                             </form>
                                         </div><!-- #respond end -->
                                     {% else %}
-                                        <h3><a href="#"><u>Please Login To Comment!</u></a></h3>
+                                        <h3><a href="{% url 'login' %}"><u>Please Login To Comment!</u></a></h3>
                                     {% endif %}
 								</div><!-- #comments end -->
 							</div>

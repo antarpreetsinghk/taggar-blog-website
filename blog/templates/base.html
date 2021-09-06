@@ -4,7 +4,10 @@
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="canonical" href="https://www.taggarassociates.com">
 	<meta name="author" content="Taggar Associates" />
+	{% block meta-tags %}{% endblock %}
 
 	<!-- Stylesheets
 	============================================= -->
@@ -17,7 +20,6 @@
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css" />
 
 	<link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
 	<link rel="stylesheet" type="text/css" href="{% static 'include/rs-plugin/css/settings.css' %}" media="screen" />
@@ -70,25 +72,25 @@
 						<nav class="primary-menu">
 
 							<ul class="menu-container">
-								<li class="menu-item current">
+								<li class="menu-item {% if request.resolver_match.view_name == 'home' %}current{% endif %}">
 									<a class="menu-link" href="{% url 'home' %}"><div>Home</div></a>
 								</li>
-								<li class="menu-item">
+								<li class="menu-item {% if request.resolver_match.view_name == 'about' %}current{% endif %}">
 									<a class="menu-link" href="{% url 'about' %}"><div>About</div></a>
 								</li>
-								<li class="menu-item">
+								<li class="menu-item {% if request.resolver_match.view_name == 'gallery' %}current{% endif %}">
 									<a class="menu-link" href="{% url 'gallery' %}"><div>Gallery</div></a>		
 								</li>
-								<li class="menu-item">
+								<li class="menu-item {% if request.resolver_match.view_name == 'videos-list' %}current{% endif %}">
 									<a class="menu-link" href="{% url 'videos-list' %}"><div>Videos</div></a>			
 								</li>
-								<li class="menu-item">
+								<li class="menu-item {% if request.resolver_match.view_name == 'terms' %}current{% endif %}">
 									<a class="menu-link" href="{% url 'terms' %}"><div>Terms</div></a>				
 								</li>
-								<li class="menu-item">
+								<li class="menu-item {% if request.resolver_match.view_name == 'privacy' %}current{% endif %}">
 									<a class="menu-link" href="{% url 'privacy' %}"><div>Privacy</div></a>				
 								</li>
-								<li class="menu-item">
+								<li class="menu-item {% if request.resolver_match.view_name == 'contact' %}current{% endif %}">
 									<a class="menu-link" href="{% url 'contact' %}"><div>Contact</div></a>					
 								</li>
 								{% if user.is_authenticated %}

@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta-tags %}
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+{% endblock %}
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -338,7 +343,7 @@
 				<div class="container clearfix">
 					<div class="heading-block center">
 						<h1>Recent Posts</h1>
-						<span>We almost blog regularly about this &amp; that.</span>
+						<span>We almost blog regularly about below topics.</span>
 					</div>
 					<div class="row gutter-40 col-mb-80">
 						<!-- Post Content ============================================= -->
@@ -358,8 +363,8 @@
 											<div class="entry-meta">
 												<ul>
 													<li><i class="icon-calendar3"></i> {{ main.updated_at|date:"M-d-Y," }}</li>
-													<li><a href="#"><i class="icon-user"></i> {{ main.author }}</a></li>
-													<li><i class="icon-folder-open"></i> <a href="#">{{ main.post_category }}</a>
+													<li><a href="{% url 'auther' id=main.author.id %}"><i class="icon-user"></i> {{ main.author|title }}</a></li>
+													<li><i class="icon-folder-open"></i> <a href="{% url 'categories' category_slug=main.post_category.slug %}">{{ main.post_category }}</a>
 												</ul>
 											</div>
 											<div class="entry-content">

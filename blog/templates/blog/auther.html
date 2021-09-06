@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta-tags %}
+	<meta name="description" content="">
+{% endblock %}
+
 {% block title %}{{ auther.username|title }}{% endblock %}
 
 {% block content %}
@@ -11,7 +15,7 @@
 			<div class="container clearfix">
 				<h1>{{ auther.username }}</h1>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
 					<li class="breadcrumb-item active" aria-current="page">{{ auther.username|title }}</li>
 				</ol>
 			</div>
@@ -41,8 +45,8 @@
 										<div class="entry-meta">
 											<ul>
 												<li><i class="icon-calendar3"></i> {{ post.updated_at|date:"M-d-Y," }}</li>
-												<li><a href="#"><i class="icon-user"></i> {{ post.author }}</a></li>
-												<li><i class="icon-folder-open"></i> {{ post.post_category }}
+												<li><i class="icon-user"></i> {{ post.author|title }}</li>
+												<li><a href="{% url 'categories' category_slug=post.post_category.slug %}"><i class="icon-folder-open"> {{ post.post_category }}</i></a>
 											</ul>
 										</div>
 										<div class="entry-content">

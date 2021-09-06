@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta-tags %}
+	<meta name="description" content="">
+	<meta name="keywords" content="{% for categories in categories_name %} {{ categories.name }}{% endfor %}">
+{% endblock %}
+
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block content %}
@@ -12,7 +17,7 @@
 				<h1>{{ category.name }}</h1>
 				<span>Our Latest Posts in {{ category.name }}</span>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
 					<li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
 				</ol>
 			</div>
@@ -42,7 +47,7 @@
 										<div class="entry-meta">
 											<ul>
 												<li><i class="icon-calendar3"></i> {{ post.updated_at|date:"M-d-Y," }}</li>
-												<li><a href="#"><i class="icon-user"></i> {{ post.author }}</a></li>
+												<li><a href="{% url 'auther' id=post.author.id %}"><i class="icon-user"></i> {{ post.author|title }}</a></li>
 												<li><i class="icon-folder-open"></i> {{ post.post_category }}
 											</ul>
 										</div>

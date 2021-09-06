@@ -1,0 +1,7 @@
+User-agent: Googlebot
+Disallow: /admin/
+
+User-agent: *
+Disallow: /admin/
+
+Sitemap: https://www.taggarassociates.com/sitemap.xml
