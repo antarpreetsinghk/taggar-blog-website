@@ -10,13 +10,14 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
     context = {
         'main':Post.objects.filter(main=True, published=True).order_by('-id')[:4],
         'recent_posts': Post.objects.filter(published=True).order_by('-id')[:7],
-        'categories': Category.objects.all().order_by('-id')
+        'categories': Category.objects.all().order_by('-id')[:10]
     }
     return render(request, 'blog/home.html', context)
 
@@ -47,10 +48,19 @@ def post_details(request, id):
 
 
 def categories(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug) 
+    category = get_object_or_404(Category, slug=category_slug)
+    posts = Post.objects.filter(post_category=category, published=True)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(posts, 12)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
     context = {
         'category': category,
-        'posts': Post.objects.filter(post_category=category, published=True),
+        'posts': posts,
         'categories_name': Category.objects.all().order_by('-id'),
     }
     return render(request, 'blog/categories.html', context)
@@ -115,10 +125,19 @@ def profile(request):
 
 
 def auther(request, id):
-    auther = get_object_or_404(User, id=id) 
+    auther = get_object_or_404(User, id=id)
+    posts = Post.objects.filter(author=auther, published=True)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(posts, 12)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
     context = {
         'auther': auther,
-        'posts': Post.objects.filter(author=auther, published=True),
+        'posts': posts,
         'categories_name': Category.objects.all().order_by('-id'),
     }
     return render(request, 'blog/auther.html', context)
