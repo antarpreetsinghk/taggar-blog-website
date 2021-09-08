@@ -28,7 +28,7 @@
 			<div class="container clearfix">
 				<div>	
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-lg-7">
 							<form method="POST">
 								<div class="col-12 form-group">
 									{% csrf_token %}
@@ -39,10 +39,8 @@
 								<small class="text-muted"><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
 							</form>
 						</div>
-						<div class="col-lg-6 ps-lg-5">
-								
-							<!-- custom content or image -->
-
+						<div class="ps-lg-4 col-lg-5">	
+							<img class="rounded" src="{% static 'images/login.jpeg' %}" alt="Alt Images">
 						</div>
 					</div>
 				</div>
