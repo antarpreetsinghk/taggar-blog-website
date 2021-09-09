@@ -16,7 +16,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home(request):
     context = {
         'main':Post.objects.filter(main=True, published=True).order_by('-id')[:4],
-        'recent_posts': Post.objects.filter(published=True).order_by('-id')[:7],
+        'recent_posts': Post.objects.filter(published=True).order_by('-id')[:10],
         'categories': Category.objects.all().order_by('-id')[:10]
     }
     return render(request, 'blog/home.html', context)

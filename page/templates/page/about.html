@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta-tags %}
-	<meta name="description" content="">
+	<meta name="description" content="Our mission is to create entrepreneurs so that they can change their way of living and work. Their revolutions may improve their standard of living. In short, in addition to creating wealth from their entrepreneurial ventures, they should also create opportunities and the conditions for a flourishing soc">
 {% endblock %}
 
 {% block title %}About Us{% endblock %}
@@ -39,18 +39,18 @@
 												{% for about in object_list %}
 												{% if about.image %}
 													<h1>{{ about.title }}</h1>
-													<div class="row mb-4" data-lightbox="gallery">
-														<div class="col-md-4">
-															<img class="rounded" src="{{ about.image.url }}" alt="Alt Images">
+													<div class="row mb-2">
+														<div class="col-md-4 mt-5">
+															<img class="rounded" src="{{ about.image.url }}" alt="About Images">
 														</div>
-														<div class="col-md-8">
+														<div class="col-md-8 mt-2">
 															<p>{{ about.text|linebreaks }}</p>
 														</div>
 													</div>
 													<div class="line"></div>
 												{% else %}
 													<h1>{{ about.title }}</h1>
-													<div class="row mb-4" data-lightbox="gallery">
+													<div class="row mb-2" data-lightbox="gallery">
 														<div class="col-md-12">
 															<p>{{ about.text|linebreaks }}</p>
 														</div>
