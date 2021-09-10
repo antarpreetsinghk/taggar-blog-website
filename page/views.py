@@ -44,7 +44,7 @@ class GalleryView(ListView):
 def videos_list(request, category_slug=None):
     category = None
     categories = VideoCategory.objects.all()
-    videos = Video.objects.all()
+    videos = Video.objects.all().order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(videos, 10)
     try:
@@ -55,7 +55,7 @@ def videos_list(request, category_slug=None):
         videos = paginator.page(paginator.num_pages)
     if category_slug:
         category = get_object_or_404(VideoCategory, slug=category_slug)
-        videos = Video.objects.filter(category=category)
+        videos = Video.objects.filter(category=category).order_by('-id')
         page = request.GET.get('page', 1)
         paginator = Paginator(videos, 10)
         try:

@@ -49,7 +49,7 @@ def post_details(request, id):
 
 def categories(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
-    posts = Post.objects.filter(post_category=category, published=True)
+    posts = Post.objects.filter(post_category=category, published=True).order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 12)
     try:
@@ -126,7 +126,7 @@ def profile(request):
 
 def auther(request, id):
     auther = get_object_or_404(User, id=id)
-    posts = Post.objects.filter(author=auther, published=True)
+    posts = Post.objects.filter(author=auther, published=True).order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 12)
     try:
