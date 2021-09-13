@@ -1,4 +1,4 @@
-from .models import AboutUs, Gallery, Video, ContactUs, Faqs, PrivacyPolicy, TermsOfUse, VideoCategory
+from .models import AboutUs, ImageCategory, Gallery, Video, ContactUs, Faqs, PrivacyPolicy, TermsOfUse, VideoCategory
 from blog.models import Category
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
@@ -35,10 +35,36 @@ class TermsofuseView(ListView):
     model = TermsOfUse
 
 
-class GalleryView(ListView):
-    template_name = "page/gallery.html"
-    model = Gallery
-    paginate_by = 15
+def images_list(request, category_slug=None):
+    category = None
+    categories = ImageCategory.objects.all()
+    images = Gallery.objects.all().order_by('-id')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(images, 12)
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        images = paginator.page(1)
+    except EmptyPage:
+        images = paginator.page(paginator.num_pages)
+    if category_slug:
+        category = get_object_or_404(ImageCategory, slug=category_slug)
+        images = Gallery.objects.filter(category=category).order_by('-id')
+        page = request.GET.get('page', 1)
+        paginator = Paginator(images, 12)
+        try:
+            images = paginator.page(page)
+        except PageNotAnInteger:
+            images = paginator.page(1)
+        except EmptyPage:
+            images = paginator.page(paginator.num_pages)
+
+    context = {
+        'category': category,
+        'categories': categories,
+        'images': images
+    }
+    return render(request, 'page/gallery.html', context)
 
 
 def videos_list(request, category_slug=None):

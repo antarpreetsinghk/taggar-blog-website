@@ -15,9 +15,24 @@ class AboutUs(models.Model):
         return self.title
 
 
+class ImageCategory(models.Model):
+    name = models.CharField(max_length=150, db_index=True)
+    slug = models.SlugField(max_length=150, unique=True ,db_index=True)
+
+    class Meta:
+        ordering = ('name', )
+        verbose_name = 'Image category'
+        verbose_name_plural = 'Image Categories'
+
+    def __str__(self):
+        return self.name
+
+
 class Gallery(models.Model):
-    title = models.CharField(max_length=255, blank=True, null=True, default='Image')
+    category = models.ForeignKey(ImageCategory, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=255, default='Image')
     image = models.ImageField(upload_to='media/gallery_images')
+    description = models.TextField(default='Taggar Associates gallery Image')
 
     def save(self):
         super().save()
